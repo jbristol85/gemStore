@@ -10,6 +10,15 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel="stylesheet" href="application.css">
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/2.0.0-beta.17/angular2.min.js"></script>-->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+	<script src="app.js"></script>
+	<script src="products.js"></script>
+
+
+
 
 	<title>Angular</title>
 </head>
@@ -19,76 +28,13 @@
 		<div class="list-group-item" ng-repeat="product in store.products" ng-hide="product.soldOut">
 			<h3>{{product.name}}<em class="pull-right">{{product.price | currency}}</em></h3>
 
-			<div ng-show="product.images.length">
+			
 			<product-gallery></product-gallery>
-			</div>
 			<!--<button ng-show="product.canPurchase"> Add to Cart</button>-->
-			<section class="tab" ng-controller="TabController as tab">
-				<ul class="nav nav-pills">
-					<li ng-class="{ active: tab.isSet(1) }">
-						<a href="" ng-click="tab.setTab(1)">Description</a>
-					</li>
-					<li ng-class="{ active: tab.isSet(2) }">
-						<a href="" ng-click="tab.setTab(2)">Specs</a>
-					</li>
-					<li ng-class="{ active: tab.isSet(3) }">
-						<a href="" ng-click="tab.setTab(3)">Reviews</a>
-					</li>
-				</ul>
-				<div ng-show="tab.isSet(1)">
-				<product-description></product-description>
-				</div>
-				<div product-specs ng-show="tab.isSet(2)">
-				</div>
-				<div ng-show="tab.isSet(3)">
-
-					<!-- Product Reviews List -->
-					<ul>
-						<h4>Reviews</h4>
-						<li ng-repeat="review in product.reviews">
-							<blockquote>
-								<strong>{{review.stars}} Stars</strong> {{review.body}}
-								<cite class="clearfix">-{{review.author}} on {{review.createdOn | date:medium}}</cite>
-							</blockquote>
-						</li>
-					</ul>
-
-					<!-- Review Form -->
-					<form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate>
-
-						<!-- Live Preview -->
-						<blockquote>
-							<strong>{{reviewCtrl.review.stars}} Stars</strong> 
-							{{reviewCtrl.review.body}}
-							<cite class="clearfix">-{{reviewCtrl.review.author}}</cite>
-						</blockquote>
-
-						<!-- Review Form -->
-						<h4>Submit a Review</h4>
-						<fieldset class="form-group">
-							<select ng-model="reviewCtrl.review.stars" class="form-control" ng-options="stars for stars in [5,4,3,2,1]" title="Stars" required>
-						<option value="">Rate The Product</option>
-					</select>
-						</fieldset>
-						<fieldset class="form-group">
-							<textarea ng-model="reviewCtrl.review.body" class="form-control" placeholder="Write a short review of the product..." title="Review" required></textarea>
-						</fieldset>
-						<fieldset class="form-group">
-							<input ng-model="reviewCtrl.review.author" type="email" class="form-control" placeholder="youremail@example.org" title="Email" required />
-						</fieldset>
-						<fieldset class="form-group">
-							<input type="submit" class="btn btn-primary pull-right" value="Submit Review" />
-						</fieldset>
-					</form>
-
-				</div>
-
-			</section>
+			<product-tabs></product-tabs>
 		</div>
 	</div>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-	<script src="app.js"></script>
+
 </body>
 
 </html>
