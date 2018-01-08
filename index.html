@@ -19,15 +19,8 @@
 		<div class="list-group-item" ng-repeat="product in store.products" ng-hide="product.soldOut">
 			<h3>{{product.name}}<em class="pull-right">{{product.price | currency}}</em></h3>
 
-			<div ng-controller="GalleryController as gallery" ng-show="product.images.length">
-				<div class="img-wrap">
-					<img ng-src="{{product.images[gallery.current]}}" />
-				</div>
-				<ul class="img-thumbnails clearfix">
-					<li class="small-image pull-left thumbnail" ng-repeat="image in product.images">
-						<img ng-src="{{image}}" />
-					</li>
-				</ul>
+			<div ng-show="product.images.length">
+			<product-gallery></product-gallery>
 			</div>
 			<!--<button ng-show="product.canPurchase"> Add to Cart</button>-->
 			<section class="tab" ng-controller="TabController as tab">
@@ -43,12 +36,9 @@
 					</li>
 				</ul>
 				<div ng-show="tab.isSet(1)">
-					<h4>Description</h4>
-					<blockquote>{{product.description}}</blockquote>
+				<product-description></product-description>
 				</div>
-				<div ng-show="tab.isSet(2)">
-					<h4>Specs</h4>
-					<blockquote>Shine: {{product.shine}} </blockquote>
+				<div product-specs ng-show="tab.isSet(2)">
 				</div>
 				<div ng-show="tab.isSet(3)">
 
